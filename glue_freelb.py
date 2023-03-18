@@ -210,10 +210,11 @@ def train(args, train_dataset, model, tokenizer, experiment=None):
 
             # ============================ Code for adversarial training=============
             # initialize delta
-            if isinstance(model, torch.nn.DataParallel):
-                embeds_init = model.module.encoder.embeddings.word_embeddings(batch[0])
-            else:
-                embeds_init = model.encoder.embeddings.word_embeddings(batch[0])
+            # if isinstance(model, torch.nn.DataParallel):
+            #     embeds_init = model.module.encoder.embeddings.word_embeddings(batch[0])
+            # else:
+            #     embeds_init = model.encoder.embeddings.word_embeddings(batch[0])
+            embeds_init = model.distilbert.embeddings.word_embeddings(batch[0])
             if args.adv_init_mag > 0:
 
                 input_mask = inputs['attention_mask'].to(embeds_init)
@@ -238,9 +239,9 @@ def train(args, train_dataset, model, tokenizer, experiment=None):
                 # (0) forward
                 delta.requires_grad_()
                 inputs['inputs_embeds'] = delta + embeds_init
-                inputs['dp_masks'] = dp_masks
+                # inputs['dp_masks'] = dp_masks
 
-                outputs, dp_masks = model(**inputs)
+                outputs = model(**inputs)
                 loss = outputs[0]  # model outputs are always tuple in transformers (see doc)
                 # (1) backward
                 if args.n_gpu > 1:
@@ -474,9 +475,6 @@ def load_and_cache_examples(args, task, tokenizer, evaluate=False):
             label_list=label_list,
             max_length=args.max_seq_length,
             output_mode=output_mode,
-            pad_on_left=bool(args.model_type in ["xlnet"]),  # pad on the left for xlnet
-            pad_token=tokenizer.convert_tokens_to_ids([tokenizer.pad_token])[0],
-            pad_token_segment_id=4 if args.model_type in ["xlnet"] else 0,
         )
         if args.local_rank in [-1, 0]:
             logger.info("Saving features into cached file %s", cached_features_file)
