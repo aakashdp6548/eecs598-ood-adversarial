@@ -1,7 +1,0 @@
-Traceback (most recent call last):
-  File "/home/aakashdp/eecs598/eecs598-ood-adversarial/glue_freelb.py", line 791, in <module>
-    main()
-  File "/home/aakashdp/eecs598/eecs598-ood-adversarial/glue_freelb.py", line 660, in main
-    raise ValueError(
-ValueError: Output directory (checkpoints/) already exists and is not empty. Use --overwrite_output_dir to overcome.
-Finished finetuning

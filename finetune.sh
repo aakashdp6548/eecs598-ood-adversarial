@@ -7,7 +7,7 @@
 
 #SBATCH --partition=gpu
 #SBATCH --gpus=1
-#SBATCH --time=04:00:00
+#SBATCH --time=02:00:00
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --mem-per-gpu=90G
@@ -23,10 +23,10 @@ GLUE_DIR=glue_data
 
 MODEL_TYPE=distilbert                        # Model type
 MODEL_NAME_OR_PATH=distilbert-base-uncased   # Specific huggingface model
-ADV_LR=5e-2                                  # Adversarial step size
-ADV_MAG=1e-1                                 # Magnitude of perturbation
+ADV_LR=0 #5e-2                                  # Adversarial step size
+ADV_MAG=0 #1e-1                                 # Magnitude of perturbation
 ADV_MAX_NORM=0                               # Maximum perturbation
-ADV_STEPS=3                                  # Number of adversarial steps
+ADV_STEPS=1 #3                                  # Number of adversarial steps
 SEQ_LEN=512                                  # Maximum sequence length
 LR=1e-5                                      # Learning rate
 BATCH_SIZE=8                                 # Batch size
@@ -50,7 +50,7 @@ python glue_freelb.py \
   --max_seq_length $SEQ_LEN \
   --per_gpu_train_batch_size $BATCH_SIZE --gradient_accumulation_steps $GRAD_ACCU \
   --learning_rate $LR --weight_decay $WEIGHT_DECAY \
-  --output_dir checkpoints/$d \
+  --output_dir checkpoints/baseline_no_adv \
   --adv-lr $ADV_LR --adv-init-mag $ADV_MAG --adv-max-norm $ADV_MAX_NORM --adv-steps $ADV_STEPS \
   --evaluate_during_training \
   --num_train_epochs $NUM_EPOCHS --warmup_steps $WARM_UP_STEPS --seed $SEED \
