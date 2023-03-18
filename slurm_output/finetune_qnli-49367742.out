@@ -1,0 +1,640 @@
+03/18/2023 00:23:36 - WARNING - __main__ -   Process rank: -1, device: cuda, n_gpu: 1, distributed training: False, 16-bits training: False
+/home/aakashdp/eecs598/eecs598-ood-adversarial/env/lib/python3.10/site-packages/transformers/data/processors/glue.py:475: FutureWarning: This processor will be removed from the library soon, preprocessing should be handled with the 🤗 Datasets library. You can have a look at this example script for pointers: https://github.com/huggingface/transformers/blob/main/examples/pytorch/text-classification/run_glue.py
+  warnings.warn(DEPRECATION_WARNING.format("processor"), FutureWarning)
+Some weights of the model checkpoint at distilbert-base-uncased were not used when initializing DistilBertForSequenceClassification: ['vocab_transform.bias', 'vocab_layer_norm.bias', 'vocab_layer_norm.weight', 'vocab_projector.bias', 'vocab_projector.weight', 'vocab_transform.weight']
+- This IS expected if you are initializing DistilBertForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing DistilBertForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of DistilBertForSequenceClassification were not initialized from the model checkpoint at distilbert-base-uncased and are newly initialized: ['pre_classifier.weight', 'classifier.bias', 'classifier.weight', 'pre_classifier.bias']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+03/18/2023 00:23:39 - INFO - __main__ -   Training/evaluation parameters Namespace(data_dir='glue_data/QNLI/processed', model_type='distilbert', model_name_or_path='distilbert-base-uncased', task_name='qnli', output_dir='checkpoints/%x-%j', config_name='', tokenizer_name='', cache_dir='', max_seq_length=512, do_train=True, do_eval=True, evaluate_during_training=True, do_lower_case=True, per_gpu_train_batch_size=8, per_gpu_eval_batch_size=8, gradient_accumulation_steps=4, learning_rate=1e-05, weight_decay=0.01, adam_epsilon=1e-08, max_grad_norm=1.0, num_train_epochs=3.0, max_steps=33112, warmup_steps=1986, logging_steps=100, save_steps=100, eval_all_checkpoints=False, no_cuda=False, overwrite_output_dir=False, overwrite_cache=False, seed=42, fp16=False, fp16_opt_level='O1', local_rank=-1, server_ip='', server_port='', adv_lr=0.05, adv_steps=3, adv_init_mag=0.1, norm_type='l2', adv_max_norm=0.0, gpu='0', expname='default', comet=False, comet_key='', hidden_dropout_prob=0.1, attention_probs_dropout_prob=0, n_gpu=1, device=device(type='cuda'), output_mode='classification')
+03/18/2023 00:23:39 - INFO - __main__ -   Loading features from cached file glue_data/QNLI/processed/cached_train_distilbert-base-uncased_512_qnli
+/home/aakashdp/eecs598/eecs598-ood-adversarial/env/lib/python3.10/site-packages/transformers/optimization.py:391: FutureWarning: This implementation of AdamW is deprecated and will be removed in a future version. Use the PyTorch implementation torch.optim.AdamW instead, or set `no_deprecation_warning=True` to disable this warning
+  warnings.warn(
+03/18/2023 00:24:03 - INFO - __main__ -   ***** Running training *****
+03/18/2023 00:24:03 - INFO - __main__ -     Num examples = 104742
+03/18/2023 00:24:03 - INFO - __main__ -     Num Epochs = 11
+03/18/2023 00:24:03 - INFO - __main__ -     Instantaneous batch size per GPU = 8
+03/18/2023 00:24:03 - INFO - __main__ -     Total train batch size (w. parallel, distributed & accumulation) = 32
+03/18/2023 00:24:03 - INFO - __main__ -     Gradient Accumulation steps = 4
+03/18/2023 00:24:03 - INFO - __main__ -     Total optimization steps = 33112
+Epoch:   0%|          | 0/11 [00:00<?, ?it/s]
+Iteration:   0%|          | 0/13093 [00:00<?, ?it/s][A
+Iteration:   0%|          | 1/13093 [00:00<1:45:25,  2.07it/s][A
+Iteration:   0%|          | 3/13093 [00:00<37:07,  5.88it/s]  [A
+Iteration:   0%|          | 5/13093 [00:00<25:24,  8.58it/s][A
+Iteration:   0%|          | 7/13093 [00:00<20:02, 10.88it/s][A
+Iteration:   0%|          | 9/13093 [00:01<19:11, 11.37it/s][A
+Iteration:   0%|          | 11/13093 [00:01<17:23, 12.53it/s][A
+Iteration:   0%|          | 13/13093 [00:01<16:22, 13.31it/s][A
+Iteration:   0%|          | 15/13093 [00:01<15:23, 14.16it/s][A
+Iteration:   0%|          | 17/13093 [00:01<14:46, 14.74it/s][A
+Iteration:   0%|          | 19/13093 [00:01<14:15, 15.29it/s][A
+Iteration:   0%|          | 21/13093 [00:01<14:36, 14.91it/s][A
+Iteration:   0%|          | 23/13093 [00:01<14:23, 15.14it/s][A
+Iteration:   0%|          | 25/13093 [00:02<14:08, 15.40it/s][A
+Iteration:   0%|          | 27/13093 [00:02<13:41, 15.90it/s][A
+Iteration:   0%|          | 29/13093 [00:02<13:56, 15.62it/s][A
+Iteration:   0%|          | 31/13093 [00:02<14:05, 15.44it/s][A
+Iteration:   0%|          | 33/13093 [00:02<13:52, 15.69it/s][A
+Iteration:   0%|          | 35/13093 [00:02<13:51, 15.71it/s][A
+Iteration:   0%|          | 37/13093 [00:02<13:50, 15.72it/s][A
+Iteration:   0%|          | 39/13093 [00:02<13:47, 15.77it/s][A
+Iteration:   0%|          | 41/13093 [00:03<14:30, 15.00it/s][A
+Iteration:   0%|          | 43/13093 [00:03<14:40, 14.82it/s][A
+Iteration:   0%|          | 45/13093 [00:03<14:25, 15.08it/s][A
+Iteration:   0%|          | 47/13093 [00:03<13:34, 16.01it/s][A
+Iteration:   0%|          | 49/13093 [00:03<13:26, 16.18it/s][A
+Iteration:   0%|          | 51/13093 [00:03<13:13, 16.43it/s][A
+Iteration:   0%|          | 53/13093 [00:03<13:57, 15.57it/s][A
+Iteration:   0%|          | 55/13093 [00:03<13:36, 15.96it/s][A
+Iteration:   0%|          | 57/13093 [00:04<13:25, 16.18it/s][A
+Iteration:   0%|          | 59/13093 [00:04<13:35, 15.98it/s][A
+Iteration:   0%|          | 61/13093 [00:04<14:07, 15.37it/s][A
+Iteration:   0%|          | 63/13093 [00:04<16:05, 13.50it/s][A
+Iteration:   0%|          | 65/13093 [00:04<15:27, 14.04it/s][A
+Iteration:   1%|          | 67/13093 [00:04<15:15, 14.23it/s][A
+Iteration:   1%|          | 69/13093 [00:04<14:32, 14.93it/s][A
+Iteration:   1%|          | 71/13093 [00:05<13:45, 15.78it/s][A
+Iteration:   1%|          | 73/13093 [00:05<14:25, 15.05it/s][A
+Iteration:   1%|          | 75/13093 [00:05<14:20, 15.13it/s][A
+Iteration:   1%|          | 77/13093 [00:05<15:23, 14.10it/s][A
+Iteration:   1%|          | 79/13093 [00:05<14:15, 15.22it/s][A
+Iteration:   1%|          | 81/13093 [00:05<14:55, 14.53it/s][A
+Iteration:   1%|          | 83/13093 [00:05<14:26, 15.01it/s][A
+Iteration:   1%|          | 85/13093 [00:05<14:47, 14.65it/s][A
+Iteration:   1%|          | 87/13093 [00:06<14:22, 15.07it/s][A
+Iteration:   1%|          | 89/13093 [00:06<14:17, 15.16it/s][A
+Iteration:   1%|          | 91/13093 [00:06<13:53, 15.60it/s][A
+Iteration:   1%|          | 93/13093 [00:06<13:55, 15.56it/s][A
+Iteration:   1%|          | 95/13093 [00:06<13:46, 15.72it/s][A
+Iteration:   1%|          | 97/13093 [00:06<13:36, 15.91it/s][A
+Iteration:   1%|          | 99/13093 [00:06<13:20, 16.24it/s][A
+Iteration:   1%|          | 101/13093 [00:07<14:10, 15.27it/s][A
+Iteration:   1%|          | 103/13093 [00:07<14:09, 15.29it/s][A
+Iteration:   1%|          | 105/13093 [00:07<14:19, 15.12it/s][A
+Iteration:   1%|          | 107/13093 [00:07<13:47, 15.70it/s][A
+Iteration:   1%|          | 109/13093 [00:07<13:55, 15.54it/s][A
+Iteration:   1%|          | 111/13093 [00:07<15:00, 14.42it/s][A
+Iteration:   1%|          | 113/13093 [00:07<14:51, 14.56it/s][A
+Iteration:   1%|          | 115/13093 [00:07<14:21, 15.06it/s][A
+Iteration:   1%|          | 117/13093 [00:08<14:33, 14.86it/s][A
+Iteration:   1%|          | 119/13093 [00:08<13:35, 15.91it/s][A
+Iteration:   1%|          | 121/13093 [00:08<13:30, 16.01it/s][A
+Iteration:   1%|          | 123/13093 [00:08<13:13, 16.34it/s][A
+Iteration:   1%|          | 125/13093 [00:08<13:50, 15.61it/s][A
+Iteration:   1%|          | 127/13093 [00:08<13:30, 15.99it/s][A
+Iteration:   1%|          | 129/13093 [00:08<14:15, 15.15it/s][A
+Iteration:   1%|          | 131/13093 [00:08<14:26, 14.95it/s][A
+Iteration:   1%|          | 133/13093 [00:09<14:16, 15.13it/s][A
+Iteration:   1%|          | 135/13093 [00:09<14:03, 15.37it/s][A
+Iteration:   1%|          | 137/13093 [00:09<15:26, 13.99it/s][A
+Iteration:   1%|          | 139/13093 [00:09<14:39, 14.73it/s][A
+Iteration:   1%|          | 141/13093 [00:09<14:45, 14.63it/s][A
+Iteration:   1%|          | 143/13093 [00:09<14:51, 14.52it/s][A
+Iteration:   1%|          | 145/13093 [00:09<15:00, 14.39it/s][A
+Iteration:   1%|          | 147/13093 [00:10<14:09, 15.24it/s][A
+Iteration:   1%|          | 149/13093 [00:10<15:01, 14.37it/s][A
+Iteration:   1%|          | 151/13093 [00:10<14:08, 15.25it/s][A
+Iteration:   1%|          | 153/13093 [00:10<15:26, 13.97it/s][A
+Iteration:   1%|          | 155/13093 [00:10<14:47, 14.58it/s][A
+Iteration:   1%|          | 157/13093 [00:10<14:30, 14.86it/s][A
+Iteration:   1%|          | 159/13093 [00:10<14:07, 15.26it/s][A
+Iteration:   1%|          | 161/13093 [00:11<14:39, 14.71it/s][A
+Iteration:   1%|          | 163/13093 [00:11<14:00, 15.38it/s][A
+Iteration:   1%|▏         | 165/13093 [00:11<14:13, 15.14it/s][A
+Iteration:   1%|▏         | 167/13093 [00:11<13:21, 16.14it/s][A
+Iteration:   1%|▏         | 169/13093 [00:11<13:35, 15.84it/s][A
+Iteration:   1%|▏         | 171/13093 [00:11<13:23, 16.08it/s][A
+Iteration:   1%|▏         | 173/13093 [00:11<13:39, 15.76it/s][A
+Iteration:   1%|▏         | 175/13093 [00:11<14:03, 15.32it/s][A
+Iteration:   1%|▏         | 177/13093 [00:12<13:50, 15.55it/s][A
+Iteration:   1%|▏         | 179/13093 [00:12<13:30, 15.93it/s][A
+Iteration:   1%|▏         | 181/13093 [00:12<13:42, 15.70it/s][A
+Iteration:   1%|▏         | 183/13093 [00:12<13:26, 16.00it/s][A
+Iteration:   1%|▏         | 185/13093 [00:12<13:39, 15.75it/s][A
+Iteration:   1%|▏         | 187/13093 [00:12<13:37, 15.80it/s][A
+Iteration:   1%|▏         | 189/13093 [00:12<13:24, 16.04it/s][A
+Iteration:   1%|▏         | 191/13093 [00:12<13:36, 15.80it/s][A
+Iteration:   1%|▏         | 193/13093 [00:13<13:28, 15.95it/s][A
+Iteration:   1%|▏         | 195/13093 [00:13<12:55, 16.63it/s][A
+Iteration:   2%|▏         | 197/13093 [00:13<12:31, 17.15it/s][A
+Iteration:   2%|▏         | 199/13093 [00:13<13:10, 16.31it/s][A
+Iteration:   2%|▏         | 201/13093 [00:13<13:15, 16.20it/s][A
+Iteration:   2%|▏         | 203/13093 [00:13<12:57, 16.58it/s][A
+Iteration:   2%|▏         | 205/13093 [00:13<13:43, 15.65it/s][A
+Iteration:   2%|▏         | 207/13093 [00:13<13:33, 15.84it/s][A
+Iteration:   2%|▏         | 209/13093 [00:13<13:35, 15.80it/s][A
+Iteration:   2%|▏         | 211/13093 [00:14<13:04, 16.42it/s][A
+Iteration:   2%|▏         | 213/13093 [00:14<13:01, 16.49it/s][A
+Iteration:   2%|▏         | 215/13093 [00:14<12:53, 16.64it/s][A
+Iteration:   2%|▏         | 217/13093 [00:14<13:17, 16.14it/s][A
+Iteration:   2%|▏         | 219/13093 [00:14<13:20, 16.09it/s][A
+Iteration:   2%|▏         | 221/13093 [00:14<13:44, 15.61it/s][A
+Iteration:   2%|▏         | 223/13093 [00:14<13:19, 16.10it/s][A
+Iteration:   2%|▏         | 225/13093 [00:14<13:26, 15.95it/s][A
+Iteration:   2%|▏         | 227/13093 [00:15<13:38, 15.72it/s][A
+Iteration:   2%|▏         | 229/13093 [00:15<14:04, 15.23it/s][A
+Iteration:   2%|▏         | 231/13093 [00:15<14:57, 14.33it/s][A
+Iteration:   2%|▏         | 233/13093 [00:15<15:25, 13.89it/s][A
+Iteration:   2%|▏         | 235/13093 [00:15<14:57, 14.33it/s][A
+Iteration:   2%|▏         | 237/13093 [00:15<14:47, 14.49it/s][A
+Iteration:   2%|▏         | 239/13093 [00:15<14:19, 14.96it/s][A
+Iteration:   2%|▏         | 241/13093 [00:16<15:18, 14.00it/s][A
+Iteration:   2%|▏         | 243/13093 [00:16<14:25, 14.84it/s][A
+Iteration:   2%|▏         | 245/13093 [00:16<14:03, 15.24it/s][A
+Iteration:   2%|▏         | 247/13093 [00:16<14:37, 14.64it/s][A
+Iteration:   2%|▏         | 249/13093 [00:16<14:15, 15.01it/s][A
+Iteration:   2%|▏         | 251/13093 [00:16<13:21, 16.01it/s][A
+Iteration:   2%|▏         | 253/13093 [00:16<13:54, 15.38it/s][A
+Iteration:   2%|▏         | 255/13093 [00:17<13:33, 15.78it/s][A
+Iteration:   2%|▏         | 257/13093 [00:17<13:24, 15.95it/s][A
+Iteration:   2%|▏         | 259/13093 [00:17<13:49, 15.46it/s][A
+Iteration:   2%|▏         | 261/13093 [00:17<13:36, 15.71it/s][A
+Iteration:   2%|▏         | 263/13093 [00:17<13:10, 16.23it/s][A
+Iteration:   2%|▏         | 265/13093 [00:17<13:21, 16.00it/s][A
+Iteration:   2%|▏         | 267/13093 [00:17<12:52, 16.61it/s][A
+Iteration:   2%|▏         | 269/13093 [00:17<13:33, 15.77it/s][A
+Iteration:   2%|▏         | 271/13093 [00:17<13:18, 16.05it/s][A
+Iteration:   2%|▏         | 273/13093 [00:18<13:08, 16.27it/s][A
+Iteration:   2%|▏         | 275/13093 [00:18<13:09, 16.25it/s][A
+Iteration:   2%|▏         | 277/13093 [00:18<13:13, 16.16it/s][A
+Iteration:   2%|▏         | 279/13093 [00:18<12:57, 16.49it/s][A
+Iteration:   2%|▏         | 281/13093 [00:18<13:14, 16.13it/s][A
+Iteration:   2%|▏         | 283/13093 [00:18<12:55, 16.52it/s][A
+Iteration:   2%|▏         | 285/13093 [00:18<13:16, 16.08it/s][A
+Iteration:   2%|▏         | 287/13093 [00:19<15:42, 13.59it/s][A
+Iteration:   2%|▏         | 289/13093 [00:19<15:09, 14.08it/s][A
+Iteration:   2%|▏         | 291/13093 [00:19<14:22, 14.85it/s][A
+Iteration:   2%|▏         | 293/13093 [00:19<14:11, 15.03it/s][A
+Iteration:   2%|▏         | 295/13093 [00:19<13:54, 15.33it/s][A
+Iteration:   2%|▏         | 297/13093 [00:19<16:05, 13.25it/s][A
+Iteration:   2%|▏         | 299/13093 [00:19<15:36, 13.67it/s][A
+Iteration:   2%|▏         | 301/13093 [00:20<14:25, 14.78it/s][A
+Iteration:   2%|▏         | 303/13093 [00:20<13:30, 15.79it/s][A
+Iteration:   2%|▏         | 305/13093 [00:20<13:46, 15.47it/s][A
+Iteration:   2%|▏         | 307/13093 [00:20<13:32, 15.73it/s][A
+Iteration:   2%|▏         | 309/13093 [00:20<13:22, 15.93it/s][A
+Iteration:   2%|▏         | 311/13093 [00:20<13:54, 15.31it/s][A
+Iteration:   2%|▏         | 313/13093 [00:20<13:49, 15.41it/s][A
+Iteration:   2%|▏         | 315/13093 [00:20<13:51, 15.36it/s][A
+Iteration:   2%|▏         | 317/13093 [00:21<14:11, 15.01it/s][A
+Iteration:   2%|▏         | 319/13093 [00:21<13:56, 15.26it/s][A
+Iteration:   2%|▏         | 321/13093 [00:21<13:55, 15.29it/s][A
+Iteration:   2%|▏         | 323/13093 [00:21<14:29, 14.68it/s][A
+Iteration:   2%|▏         | 325/13093 [00:21<14:16, 14.90it/s][A
+Iteration:   2%|▏         | 327/13093 [00:21<13:33, 15.69it/s][A
+Iteration:   3%|▎         | 329/13093 [00:21<14:42, 14.47it/s][A
+Iteration:   3%|▎         | 331/13093 [00:21<15:00, 14.18it/s][A
+Iteration:   3%|▎         | 333/13093 [00:22<15:42, 13.53it/s][A
+Iteration:   3%|▎         | 335/13093 [00:22<14:55, 14.24it/s][A
+Iteration:   3%|▎         | 337/13093 [00:22<14:59, 14.19it/s][A
+Iteration:   3%|▎         | 339/13093 [00:22<14:05, 15.08it/s][A
+Iteration:   3%|▎         | 341/13093 [00:22<13:50, 15.35it/s][A
+Iteration:   3%|▎         | 343/13093 [00:22<13:54, 15.28it/s][A
+Iteration:   3%|▎         | 345/13093 [00:22<14:42, 14.45it/s][A
+Iteration:   3%|▎         | 347/13093 [00:23<14:14, 14.92it/s][A
+Iteration:   3%|▎         | 349/13093 [00:23<13:57, 15.21it/s][A
+Iteration:   3%|▎         | 351/13093 [00:23<14:03, 15.11it/s][A
+Iteration:   3%|▎         | 353/13093 [00:23<14:12, 14.95it/s][A
+Iteration:   3%|▎         | 355/13093 [00:23<13:36, 15.60it/s][A
+Iteration:   3%|▎         | 357/13093 [00:23<13:25, 15.81it/s][A
+Iteration:   3%|▎         | 359/13093 [00:23<13:48, 15.38it/s][A
+Iteration:   3%|▎         | 361/13093 [00:23<14:26, 14.70it/s][A
+Iteration:   3%|▎         | 363/13093 [00:24<14:31, 14.60it/s][A
+Iteration:   3%|▎         | 365/13093 [00:24<14:45, 14.37it/s][A
+Iteration:   3%|▎         | 367/13093 [00:24<14:07, 15.01it/s][A
+Iteration:   3%|▎         | 369/13093 [00:24<14:10, 14.97it/s][A
+Iteration:   3%|▎         | 371/13093 [00:24<14:02, 15.10it/s][A
+Iteration:   3%|▎         | 373/13093 [00:24<13:26, 15.78it/s][A
+Iteration:   3%|▎         | 375/13093 [00:24<13:06, 16.16it/s][A
+Iteration:   3%|▎         | 377/13093 [00:25<13:08, 16.13it/s][A
+Iteration:   3%|▎         | 379/13093 [00:25<13:02, 16.25it/s][A
+Iteration:   3%|▎         | 381/13093 [00:25<13:07, 16.14it/s][A
+Iteration:   3%|▎         | 383/13093 [00:25<12:54, 16.40it/s][A
+Iteration:   3%|▎         | 385/13093 [00:25<13:05, 16.18it/s][A
+Iteration:   3%|▎         | 387/13093 [00:25<12:47, 16.55it/s][A
+Iteration:   3%|▎         | 389/13093 [00:25<14:17, 14.81it/s][A
+Iteration:   3%|▎         | 391/13093 [00:25<13:53, 15.24it/s][A
+Iteration:   3%|▎         | 393/13093 [00:26<14:11, 14.91it/s][A
+Iteration:   3%|▎         | 395/13093 [00:26<13:53, 15.24it/s][A
+Iteration:   3%|▎         | 397/13093 [00:26<13:42, 15.43it/s][A
+Iteration:   3%|▎         | 399/13093 [00:26<14:07, 14.97it/s][A03/18/2023 00:24:30 - INFO - __main__ -   Loading features from cached file glue_data/QNLI/processed/cached_dev_distilbert-base-uncased_512_qnli
+03/18/2023 00:24:31 - INFO - __main__ -   ***** Running evaluation  *****
+03/18/2023 00:24:31 - INFO - __main__ -     Num examples = 5462
+03/18/2023 00:24:31 - INFO - __main__ -     Batch size = 8
+
+
+Evaluating:   0%|          | 0/683 [00:00<?, ?it/s][A[A
+
+Evaluating:   2%|▏         | 13/683 [00:00<00:05, 121.10it/s][A[A
+
+Evaluating:   4%|▍         | 28/683 [00:00<00:04, 131.42it/s][A[A
+
+Evaluating:   6%|▌         | 42/683 [00:00<00:04, 134.63it/s][A[A
+
+Evaluating:   8%|▊         | 56/683 [00:00<00:04, 132.47it/s][A[A
+
+Evaluating:  10%|█         | 70/683 [00:00<00:04, 126.86it/s][A[A
+
+Evaluating:  12%|█▏        | 85/683 [00:00<00:04, 131.67it/s][A[A
+
+Evaluating:  14%|█▍        | 99/683 [00:00<00:04, 128.17it/s][A[A
+
+Evaluating:  17%|█▋        | 113/683 [00:00<00:04, 128.87it/s][A[A
+
+Evaluating:  18%|█▊        | 126/683 [00:00<00:04, 129.01it/s][A[A
+
+Evaluating:  20%|██        | 140/683 [00:01<00:04, 128.70it/s][A[A
+
+Evaluating:  23%|██▎       | 154/683 [00:01<00:04, 131.79it/s][A[A
+
+Evaluating:  25%|██▍       | 168/683 [00:01<00:03, 133.38it/s][A[A
+
+Evaluating:  27%|██▋       | 182/683 [00:01<00:03, 130.68it/s][A[A
+
+Evaluating:  29%|██▉       | 197/683 [00:01<00:03, 133.43it/s][A[A
+
+Evaluating:  31%|███       | 211/683 [00:01<00:03, 134.39it/s][A[A
+
+Evaluating:  33%|███▎      | 225/683 [00:01<00:03, 134.20it/s][A[A
+
+Evaluating:  35%|███▍      | 239/683 [00:01<00:03, 132.88it/s][A[A
+
+Evaluating:  37%|███▋      | 253/683 [00:01<00:03, 132.96it/s][A[A
+
+Evaluating:  39%|███▉      | 267/683 [00:02<00:03, 133.21it/s][A[A
+
+Evaluating:  41%|████      | 281/683 [00:02<00:03, 131.52it/s][A[A
+
+Evaluating:  43%|████▎     | 295/683 [00:02<00:02, 133.40it/s][A[A
+
+Evaluating:  45%|████▌     | 309/683 [00:02<00:02, 130.29it/s][A[A
+
+Evaluating:  47%|████▋     | 323/683 [00:02<00:02, 124.70it/s][A[A
+
+Evaluating:  49%|████▉     | 338/683 [00:02<00:02, 130.29it/s][A[A
+
+Evaluating:  52%|█████▏    | 353/683 [00:02<00:02, 132.55it/s][A[A
+
+Evaluating:  54%|█████▎    | 367/683 [00:02<00:02, 134.35it/s][A[A
+
+Evaluating:  56%|█████▌    | 381/683 [00:02<00:02, 132.35it/s][A[A
+
+Evaluating:  58%|█████▊    | 395/683 [00:03<00:02, 133.97it/s][A[A
+
+Evaluating:  60%|█████▉    | 409/683 [00:03<00:02, 128.82it/s][A[A
+
+Evaluating:  62%|██████▏   | 422/683 [00:03<00:02, 128.52it/s][A[A
+
+Evaluating:  64%|██████▍   | 436/683 [00:03<00:01, 129.12it/s][A[A
+
+Evaluating:  66%|██████▌   | 450/683 [00:03<00:01, 131.70it/s][A[A
+
+Evaluating:  68%|██████▊   | 465/683 [00:03<00:01, 134.05it/s][A[A
+
+Evaluating:  70%|███████   | 479/683 [00:03<00:01, 133.29it/s][A[A
+
+Evaluating:  72%|███████▏  | 494/683 [00:03<00:01, 135.77it/s][A[A
+
+Evaluating:  74%|███████▍  | 508/683 [00:03<00:01, 136.96it/s][A[A
+
+Evaluating:  76%|███████▋  | 522/683 [00:03<00:01, 135.05it/s][A[A
+
+Evaluating:  78%|███████▊  | 536/683 [00:04<00:01, 135.12it/s][A[A
+
+Evaluating:  81%|████████  | 551/683 [00:04<00:00, 136.34it/s][A[A
+
+Evaluating:  83%|████████▎ | 566/683 [00:04<00:00, 138.48it/s][A[A
+
+Evaluating:  85%|████████▍ | 580/683 [00:04<00:00, 135.69it/s][A[A
+
+Evaluating:  87%|████████▋ | 594/683 [00:04<00:00, 135.49it/s][A[A
+
+Evaluating:  89%|████████▉ | 608/683 [00:04<00:00, 135.15it/s][A[A
+
+Evaluating:  91%|█████████ | 622/683 [00:04<00:00, 134.30it/s][A[A
+
+Evaluating:  93%|█████████▎| 636/683 [00:04<00:00, 135.75it/s][A[A
+
+Evaluating:  95%|█████████▌| 650/683 [00:04<00:00, 136.19it/s][A[A
+
+Evaluating:  97%|█████████▋| 664/683 [00:05<00:00, 134.68it/s][A[A
+
+Evaluating:  99%|█████████▉| 679/683 [00:05<00:00, 136.71it/s][A[AEvaluating: 100%|██████████| 683/683 [00:05<00:00, 132.89it/s]
+/home/aakashdp/eecs598/eecs598-ood-adversarial/env/lib/python3.10/site-packages/transformers/data/metrics/__init__.py:61: FutureWarning: This metric will be removed from the library soon, metrics should be handled with the 🤗 Evaluate library. You can have a look at this example script for pointers: https://github.com/huggingface/transformers/blob/main/examples/pytorch/text-classification/run_glue.py
+  warnings.warn(DEPRECATION_WARNING, FutureWarning)
+/home/aakashdp/eecs598/eecs598-ood-adversarial/env/lib/python3.10/site-packages/transformers/data/metrics/__init__.py:31: FutureWarning: This metric will be removed from the library soon, metrics should be handled with the 🤗 Evaluate library. You can have a look at this example script for pointers: https://github.com/huggingface/transformers/blob/main/examples/pytorch/text-classification/run_glue.py
+  warnings.warn(DEPRECATION_WARNING, FutureWarning)
+03/18/2023 00:24:38 - INFO - __main__ -   ***** Eval results  *****
+03/18/2023 00:24:38 - INFO - __main__ -     acc = 0.49414134016843647
+/sw/pkgs/arc/python/3.10.4/pytorch/1.12.1/lib/python3.10/site-packages/torch/optim/lr_scheduler.py:249: UserWarning: To get the last learning rate computed by the scheduler, please use `get_last_lr()`.
+  warnings.warn("To get the last learning rate computed by the scheduler, "
+03/18/2023 00:24:39 - INFO - __main__ -   Saving model checkpoint to checkpoints/%x-%j/checkpoint-last
+03/18/2023 00:24:41 - INFO - __main__ -   Saving optimizer and scheduler states to checkpoints/%x-%j/checkpoint-last
+
+Iteration:   3%|▎         | 401/13093 [00:38<6:22:57,  1.81s/it][A
+Iteration:   3%|▎         | 403/13093 [00:38<4:32:43,  1.29s/it][A
+Iteration:   3%|▎         | 405/13093 [00:38<3:15:08,  1.08it/s][A
+Iteration:   3%|▎         | 407/13093 [00:38<2:20:17,  1.51it/s][A
+Iteration:   3%|▎         | 409/13093 [00:38<1:42:07,  2.07it/s][A
+Iteration:   3%|▎         | 411/13093 [00:38<1:15:06,  2.81it/s][A
+Iteration:   3%|▎         | 413/13093 [00:38<56:24,  3.75it/s]  [A
+Iteration:   3%|▎         | 415/13093 [00:39<43:19,  4.88it/s][A
+Iteration:   3%|▎         | 417/13093 [00:39<34:29,  6.13it/s][A
+Iteration:   3%|▎         | 419/13093 [00:39<27:39,  7.64it/s][A
+Iteration:   3%|▎         | 421/13093 [00:39<23:33,  8.96it/s][A
+Iteration:   3%|▎         | 423/13093 [00:39<20:37, 10.24it/s][A
+Iteration:   3%|▎         | 425/13093 [00:39<18:15, 11.56it/s][A
+Iteration:   3%|▎         | 427/13093 [00:39<16:32, 12.76it/s][A
+Iteration:   3%|▎         | 429/13093 [00:39<15:22, 13.73it/s][A
+Iteration:   3%|▎         | 431/13093 [00:40<15:30, 13.62it/s][A
+Iteration:   3%|▎         | 433/13093 [00:40<15:21, 13.74it/s][A
+Iteration:   3%|▎         | 435/13093 [00:40<14:57, 14.10it/s][A
+Iteration:   3%|▎         | 437/13093 [00:40<14:31, 14.52it/s][A
+Iteration:   3%|▎         | 439/13093 [00:40<13:48, 15.26it/s][A
+Iteration:   3%|▎         | 441/13093 [00:40<13:40, 15.42it/s][A
+Iteration:   3%|▎         | 443/13093 [00:40<13:24, 15.73it/s][A
+Iteration:   3%|▎         | 445/13093 [00:41<14:06, 14.95it/s][A
+Iteration:   3%|▎         | 447/13093 [00:41<14:00, 15.05it/s][A
+Iteration:   3%|▎         | 449/13093 [00:41<13:42, 15.37it/s][A
+Iteration:   3%|▎         | 451/13093 [00:41<12:58, 16.24it/s][A
+Iteration:   3%|▎         | 453/13093 [00:41<13:42, 15.37it/s][A
+Iteration:   3%|▎         | 455/13093 [00:41<13:42, 15.37it/s][A
+Iteration:   3%|▎         | 457/13093 [00:41<13:25, 15.68it/s][A
+Iteration:   4%|▎         | 459/13093 [00:41<13:00, 16.18it/s][A
+Iteration:   4%|▎         | 461/13093 [00:42<13:05, 16.07it/s][A
+Iteration:   4%|▎         | 463/13093 [00:42<13:13, 15.92it/s][A
+Iteration:   4%|▎         | 465/13093 [00:42<12:52, 16.35it/s][A
+Iteration:   4%|▎         | 467/13093 [00:42<12:56, 16.25it/s][A
+Iteration:   4%|▎         | 469/13093 [00:42<13:48, 15.24it/s][A
+Iteration:   4%|▎         | 471/13093 [00:42<13:41, 15.36it/s][A
+Iteration:   4%|▎         | 473/13093 [00:42<13:55, 15.11it/s][A
+Iteration:   4%|▎         | 475/13093 [00:42<13:38, 15.41it/s][A
+Iteration:   4%|▎         | 477/13093 [00:43<13:48, 15.23it/s][A
+Iteration:   4%|▎         | 479/13093 [00:43<13:29, 15.58it/s][A
+Iteration:   4%|▎         | 481/13093 [00:43<13:57, 15.06it/s][A
+Iteration:   4%|▎         | 483/13093 [00:43<16:14, 12.94it/s][A
+Iteration:   4%|▎         | 485/13093 [00:43<15:30, 13.55it/s][A
+Iteration:   4%|▎         | 487/13093 [00:43<14:45, 14.24it/s][A
+Iteration:   4%|▎         | 489/13093 [00:43<15:00, 14.00it/s][A
+Iteration:   4%|▍         | 491/13093 [00:44<14:32, 14.45it/s][A
+Iteration:   4%|▍         | 493/13093 [00:44<14:09, 14.84it/s][A
+Iteration:   4%|▍         | 495/13093 [00:44<13:48, 15.20it/s][A
+Iteration:   4%|▍         | 497/13093 [00:44<14:02, 14.95it/s][A
+Iteration:   4%|▍         | 499/13093 [00:44<13:58, 15.01it/s][A
+Iteration:   4%|▍         | 501/13093 [00:44<13:57, 15.04it/s][A
+Iteration:   4%|▍         | 503/13093 [00:44<13:14, 15.84it/s][A
+Iteration:   4%|▍         | 505/13093 [00:44<13:00, 16.13it/s][A
+Iteration:   4%|▍         | 507/13093 [00:45<13:30, 15.53it/s][A
+Iteration:   4%|▍         | 509/13093 [00:45<14:41, 14.28it/s][A
+Iteration:   4%|▍         | 511/13093 [00:45<15:53, 13.19it/s][A
+Iteration:   4%|▍         | 513/13093 [00:45<15:29, 13.54it/s][A
+Iteration:   4%|▍         | 515/13093 [00:45<14:36, 14.36it/s][A
+Iteration:   4%|▍         | 517/13093 [00:45<14:10, 14.79it/s][A
+Iteration:   4%|▍         | 519/13093 [00:45<13:24, 15.64it/s][A
+Iteration:   4%|▍         | 521/13093 [00:46<13:06, 15.99it/s][A
+Iteration:   4%|▍         | 523/13093 [00:46<13:06, 15.99it/s][A
+Iteration:   4%|▍         | 525/13093 [00:46<13:23, 15.63it/s][A
+Iteration:   4%|▍         | 527/13093 [00:46<13:12, 15.85it/s][A
+Iteration:   4%|▍         | 529/13093 [00:46<13:01, 16.09it/s][A
+Iteration:   4%|▍         | 531/13093 [00:46<12:50, 16.30it/s][A
+Iteration:   4%|▍         | 533/13093 [00:46<13:19, 15.71it/s][A
+Iteration:   4%|▍         | 535/13093 [00:46<13:00, 16.08it/s][A
+Iteration:   4%|▍         | 537/13093 [00:47<13:16, 15.77it/s][A
+Iteration:   4%|▍         | 539/13093 [00:47<13:16, 15.76it/s][A
+Iteration:   4%|▍         | 541/13093 [00:47<13:12, 15.84it/s][A
+Iteration:   4%|▍         | 543/13093 [00:47<13:06, 15.95it/s][A
+Iteration:   4%|▍         | 545/13093 [00:47<14:07, 14.80it/s][A
+Iteration:   4%|▍         | 547/13093 [00:47<15:32, 13.45it/s][A
+Iteration:   4%|▍         | 549/13093 [00:47<14:45, 14.17it/s][A
+Iteration:   4%|▍         | 551/13093 [00:48<14:11, 14.73it/s][A
+Iteration:   4%|▍         | 553/13093 [00:48<13:31, 15.45it/s][A
+Iteration:   4%|▍         | 555/13093 [00:48<14:06, 14.81it/s][A
+Iteration:   4%|▍         | 557/13093 [00:48<13:36, 15.34it/s][A
+Iteration:   4%|▍         | 559/13093 [00:48<14:10, 14.74it/s][A
+Iteration:   4%|▍         | 561/13093 [00:48<14:20, 14.56it/s][A
+Iteration:   4%|▍         | 563/13093 [00:48<13:34, 15.37it/s][A
+Iteration:   4%|▍         | 565/13093 [00:48<13:27, 15.51it/s][A
+Iteration:   4%|▍         | 567/13093 [00:49<13:21, 15.62it/s][A
+Iteration:   4%|▍         | 569/13093 [00:49<13:17, 15.71it/s][A
+Iteration:   4%|▍         | 571/13093 [00:49<13:31, 15.42it/s][A
+Iteration:   4%|▍         | 573/13093 [00:49<14:15, 14.64it/s][A
+Iteration:   4%|▍         | 575/13093 [00:49<13:35, 15.36it/s][A
+Iteration:   4%|▍         | 577/13093 [00:49<13:37, 15.31it/s][A
+Iteration:   4%|▍         | 579/13093 [00:49<13:09, 15.85it/s][A
+Iteration:   4%|▍         | 581/13093 [00:49<13:29, 15.45it/s][A
+Iteration:   4%|▍         | 583/13093 [00:50<14:07, 14.76it/s][A
+Iteration:   4%|▍         | 585/13093 [00:50<18:48, 11.09it/s][A
+Iteration:   4%|▍         | 587/13093 [00:50<16:57, 12.29it/s][A
+Iteration:   4%|▍         | 589/13093 [00:50<15:46, 13.21it/s][A
+Iteration:   5%|▍         | 591/13093 [00:50<14:14, 14.64it/s][A
+Iteration:   5%|▍         | 593/13093 [00:50<14:12, 14.66it/s][A
+Iteration:   5%|▍         | 595/13093 [00:50<13:33, 15.36it/s][A
+Iteration:   5%|▍         | 597/13093 [00:51<13:33, 15.37it/s][A
+Iteration:   5%|▍         | 599/13093 [00:51<13:16, 15.68it/s][A
+Iteration:   5%|▍         | 601/13093 [00:51<13:16, 15.68it/s][A
+Iteration:   5%|▍         | 603/13093 [00:51<12:45, 16.32it/s][A
+Iteration:   5%|▍         | 605/13093 [00:51<13:11, 15.77it/s][A
+Iteration:   5%|▍         | 607/13093 [00:51<13:03, 15.94it/s][A
+Iteration:   5%|▍         | 609/13093 [00:51<12:45, 16.31it/s][A
+Iteration:   5%|▍         | 611/13093 [00:51<12:25, 16.75it/s][A
+Iteration:   5%|▍         | 613/13093 [00:52<12:59, 16.01it/s][A
+Iteration:   5%|▍         | 615/13093 [00:52<13:24, 15.51it/s][A
+Iteration:   5%|▍         | 617/13093 [00:52<13:18, 15.62it/s][A
+Iteration:   5%|▍         | 619/13093 [00:52<12:50, 16.19it/s][A
+Iteration:   5%|▍         | 621/13093 [00:52<13:05, 15.87it/s][A
+Iteration:   5%|▍         | 623/13093 [00:52<12:53, 16.12it/s][A
+Iteration:   5%|▍         | 625/13093 [00:52<12:55, 16.07it/s][A
+Iteration:   5%|▍         | 627/13093 [00:52<12:53, 16.12it/s][A
+Iteration:   5%|▍         | 629/13093 [00:53<14:13, 14.60it/s][A
+Iteration:   5%|▍         | 631/13093 [00:53<14:04, 14.75it/s][A
+Iteration:   5%|▍         | 633/13093 [00:53<13:56, 14.89it/s][A
+Iteration:   5%|▍         | 635/13093 [00:53<13:38, 15.21it/s][A
+Iteration:   5%|▍         | 637/13093 [00:53<13:28, 15.40it/s][A
+Iteration:   5%|▍         | 639/13093 [00:53<13:02, 15.92it/s][A
+Iteration:   5%|▍         | 641/13093 [00:53<12:32, 16.54it/s][A
+Iteration:   5%|▍         | 643/13093 [00:54<12:43, 16.31it/s][A
+Iteration:   5%|▍         | 645/13093 [00:54<13:55, 14.90it/s][A
+Iteration:   5%|▍         | 647/13093 [00:54<13:59, 14.83it/s][A
+Iteration:   5%|▍         | 649/13093 [00:54<13:35, 15.26it/s][A
+Iteration:   5%|▍         | 651/13093 [00:54<13:07, 15.80it/s][A
+Iteration:   5%|▍         | 653/13093 [00:54<14:36, 14.20it/s][A
+Iteration:   5%|▌         | 655/13093 [00:54<14:03, 14.75it/s][A
+Iteration:   5%|▌         | 657/13093 [00:54<14:10, 14.62it/s][A
+Iteration:   5%|▌         | 659/13093 [00:55<13:49, 14.99it/s][A
+Iteration:   5%|▌         | 661/13093 [00:55<13:56, 14.87it/s][A
+Iteration:   5%|▌         | 663/13093 [00:55<13:15, 15.62it/s][A
+Iteration:   5%|▌         | 665/13093 [00:55<13:03, 15.85it/s][A
+Iteration:   5%|▌         | 667/13093 [00:55<13:24, 15.44it/s][A
+Iteration:   5%|▌         | 669/13093 [00:55<13:01, 15.90it/s][A
+Iteration:   5%|▌         | 671/13093 [00:55<13:22, 15.49it/s][A
+Iteration:   5%|▌         | 673/13093 [00:56<13:26, 15.40it/s][A
+Iteration:   5%|▌         | 675/13093 [00:56<13:22, 15.47it/s][A
+Iteration:   5%|▌         | 677/13093 [00:56<12:56, 16.00it/s][A
+Iteration:   5%|▌         | 679/13093 [00:56<12:54, 16.03it/s][A
+Iteration:   5%|▌         | 681/13093 [00:56<13:38, 15.17it/s][A
+Iteration:   5%|▌         | 683/13093 [00:56<13:20, 15.50it/s][A
+Iteration:   5%|▌         | 685/13093 [00:56<13:14, 15.63it/s][A
+Iteration:   5%|▌         | 687/13093 [00:56<13:03, 15.84it/s][A
+Iteration:   5%|▌         | 689/13093 [00:57<13:27, 15.36it/s][A
+Iteration:   5%|▌         | 691/13093 [00:57<13:38, 15.16it/s][A
+Iteration:   5%|▌         | 693/13093 [00:57<13:36, 15.19it/s][A
+Iteration:   5%|▌         | 695/13093 [00:57<12:57, 15.95it/s][A
+Iteration:   5%|▌         | 697/13093 [00:57<12:47, 16.15it/s][A
+Iteration:   5%|▌         | 699/13093 [00:57<12:40, 16.30it/s][A
+Iteration:   5%|▌         | 701/13093 [00:57<13:12, 15.63it/s][A
+Iteration:   5%|▌         | 703/13093 [00:57<12:58, 15.91it/s][A
+Iteration:   5%|▌         | 705/13093 [00:58<13:43, 15.04it/s][A
+Iteration:   5%|▌         | 707/13093 [00:58<13:25, 15.37it/s][A
+Iteration:   5%|▌         | 709/13093 [00:58<13:36, 15.16it/s][A
+Iteration:   5%|▌         | 711/13093 [00:58<13:43, 15.03it/s][A
+Iteration:   5%|▌         | 713/13093 [00:58<13:25, 15.37it/s][A
+Iteration:   5%|▌         | 715/13093 [00:58<13:22, 15.43it/s][A
+Iteration:   5%|▌         | 717/13093 [00:58<13:36, 15.16it/s][A
+Iteration:   5%|▌         | 719/13093 [00:58<13:01, 15.84it/s][A
+Iteration:   6%|▌         | 721/13093 [00:59<13:22, 15.42it/s][A
+Iteration:   6%|▌         | 723/13093 [00:59<12:59, 15.86it/s][A
+Iteration:   6%|▌         | 725/13093 [00:59<13:12, 15.61it/s][A
+Iteration:   6%|▌         | 727/13093 [00:59<12:48, 16.10it/s][A
+Iteration:   6%|▌         | 729/13093 [00:59<13:20, 15.44it/s][A
+Iteration:   6%|▌         | 731/13093 [00:59<13:38, 15.11it/s][A
+Iteration:   6%|▌         | 733/13093 [00:59<14:07, 14.58it/s][A
+Iteration:   6%|▌         | 735/13093 [01:00<13:21, 15.42it/s][A
+Iteration:   6%|▌         | 737/13093 [01:00<13:40, 15.07it/s][A
+Iteration:   6%|▌         | 739/13093 [01:00<13:26, 15.32it/s][A
+Iteration:   6%|▌         | 741/13093 [01:00<13:38, 15.10it/s][A
+Iteration:   6%|▌         | 743/13093 [01:00<14:13, 14.47it/s][A
+Iteration:   6%|▌         | 745/13093 [01:00<14:20, 14.34it/s][A
+Iteration:   6%|▌         | 747/13093 [01:00<13:45, 14.96it/s][A
+Iteration:   6%|▌         | 749/13093 [01:00<13:36, 15.12it/s][A
+Iteration:   6%|▌         | 751/13093 [01:01<13:50, 14.87it/s][A
+Iteration:   6%|▌         | 753/13093 [01:01<14:00, 14.69it/s][A
+Iteration:   6%|▌         | 755/13093 [01:01<13:39, 15.06it/s][A
+Iteration:   6%|▌         | 757/13093 [01:01<13:29, 15.25it/s][A
+Iteration:   6%|▌         | 759/13093 [01:01<15:17, 13.44it/s][A
+Iteration:   6%|▌         | 761/13093 [01:01<14:31, 14.15it/s][A
+Iteration:   6%|▌         | 763/13093 [01:01<13:54, 14.77it/s][A
+Iteration:   6%|▌         | 765/13093 [01:02<14:08, 14.53it/s][A
+Iteration:   6%|▌         | 768/13093 [01:02<12:57, 15.85it/s][A
+Iteration:   6%|▌         | 770/13093 [01:02<13:10, 15.58it/s][A
+Iteration:   6%|▌         | 772/13093 [01:02<15:21, 13.38it/s][A
+Iteration:   6%|▌         | 774/13093 [01:02<14:09, 14.50it/s][A
+Iteration:   6%|▌         | 776/13093 [01:02<15:02, 13.65it/s][A
+Iteration:   6%|▌         | 778/13093 [01:02<15:22, 13.36it/s][A
+Iteration:   6%|▌         | 780/13093 [01:03<14:42, 13.95it/s][A
+Iteration:   6%|▌         | 782/13093 [01:03<14:10, 14.48it/s][A
+Iteration:   6%|▌         | 784/13093 [01:03<14:14, 14.41it/s][A
+Iteration:   6%|▌         | 786/13093 [01:03<13:36, 15.08it/s][A
+Iteration:   6%|▌         | 788/13093 [01:03<13:15, 15.47it/s][A
+Iteration:   6%|▌         | 790/13093 [01:03<13:12, 15.53it/s][A
+Iteration:   6%|▌         | 792/13093 [01:03<13:25, 15.27it/s][A
+Iteration:   6%|▌         | 794/13093 [01:04<13:08, 15.59it/s][A
+Iteration:   6%|▌         | 796/13093 [01:04<13:23, 15.30it/s][A
+Iteration:   6%|▌         | 798/13093 [01:04<12:58, 15.79it/s][A03/18/2023 00:25:08 - INFO - __main__ -   Loading features from cached file glue_data/QNLI/processed/cached_dev_distilbert-base-uncased_512_qnli
+03/18/2023 00:25:09 - INFO - __main__ -   ***** Running evaluation  *****
+03/18/2023 00:25:09 - INFO - __main__ -     Num examples = 5462
+03/18/2023 00:25:09 - INFO - __main__ -     Batch size = 8
+{"eval_acc": 0.49414134016843647, "eval_best_criterion": 0.49414134016843647, "eval_best_name": "acc", "learning_rate": 5.035246727089628e-07, "loss": 0.6999008870869875, "max_seq_len": 228, "step": 100}
+
+
+Evaluating:   0%|          | 0/683 [00:00<?, ?it/s][A[A
+
+Evaluating:   2%|▏         | 13/683 [00:00<00:05, 120.56it/s][A[A
+
+Evaluating:   4%|▍         | 28/683 [00:00<00:04, 131.20it/s][A[A
+
+Evaluating:   6%|▌         | 42/683 [00:00<00:04, 134.49it/s][A[A
+
+Evaluating:   8%|▊         | 56/683 [00:00<00:04, 132.35it/s][A[A
+
+Evaluating:  10%|█         | 70/683 [00:00<00:04, 126.70it/s][A[A
+
+Evaluating:  12%|█▏        | 85/683 [00:00<00:04, 131.57it/s][A[A
+
+Evaluating:  14%|█▍        | 99/683 [00:00<00:04, 128.03it/s][A[A
+
+Evaluating:  17%|█▋        | 113/683 [00:00<00:04, 128.70it/s][A[A
+
+Evaluating:  18%|█▊        | 126/683 [00:00<00:04, 128.93it/s][A[A
+
+Evaluating:  20%|██        | 140/683 [00:01<00:04, 128.56it/s][A[A
+
+Evaluating:  23%|██▎       | 154/683 [00:01<00:04, 131.66it/s][A[A
+
+Evaluating:  25%|██▍       | 168/683 [00:01<00:03, 133.21it/s][A[A
+
+Evaluating:  27%|██▋       | 182/683 [00:01<00:03, 130.54it/s][A[A
+
+Evaluating:  29%|██▉       | 197/683 [00:01<00:03, 133.33it/s][A[A
+
+Evaluating:  31%|███       | 211/683 [00:01<00:03, 134.19it/s][A[A
+
+Evaluating:  33%|███▎      | 225/683 [00:01<00:03, 134.01it/s][A[A
+
+Evaluating:  35%|███▍      | 239/683 [00:01<00:03, 132.68it/s][A[A
+
+Evaluating:  37%|███▋      | 253/683 [00:01<00:03, 132.80it/s][A[A
+
+Evaluating:  39%|███▉      | 267/683 [00:02<00:03, 133.05it/s][A[A
+
+Evaluating:  41%|████      | 281/683 [00:02<00:03, 131.36it/s][A[A
+
+Evaluating:  43%|████▎     | 295/683 [00:02<00:02, 133.27it/s][A[A
+
+Evaluating:  45%|████▌     | 309/683 [00:02<00:02, 130.17it/s][A[A
+
+Evaluating:  47%|████▋     | 323/683 [00:02<00:02, 124.66it/s][A[A
+
+Evaluating:  49%|████▉     | 338/683 [00:02<00:02, 130.25it/s][A[A
+
+Evaluating:  52%|█████▏    | 353/683 [00:02<00:02, 132.47it/s][A[A
+
+Evaluating:  54%|█████▎    | 367/683 [00:02<00:02, 134.26it/s][A[A
+
+Evaluating:  56%|█████▌    | 381/683 [00:02<00:02, 132.33it/s][A[A
+
+Evaluating:  58%|█████▊    | 395/683 [00:03<00:02, 133.86it/s][A[A
+
+Evaluating:  60%|█████▉    | 409/683 [00:03<00:02, 128.73it/s][A[A
+
+Evaluating:  62%|██████▏   | 422/683 [00:03<00:02, 128.58it/s][A[A
+
+Evaluating:  64%|██████▍   | 436/683 [00:03<00:01, 129.16it/s][A[A
+
+Evaluating:  66%|██████▌   | 450/683 [00:03<00:01, 131.69it/s][A[A
+
+Evaluating:  68%|██████▊   | 465/683 [00:03<00:01, 133.94it/s][A[A
+
+Evaluating:  70%|███████   | 479/683 [00:03<00:01, 133.21it/s][A[A
+
+Evaluating:  72%|███████▏  | 494/683 [00:03<00:01, 135.76it/s][A[A
+
+Evaluating:  74%|███████▍  | 508/683 [00:03<00:01, 136.95it/s][A[A
+
+Evaluating:  76%|███████▋  | 522/683 [00:03<00:01, 134.90it/s][A[A
+
+Evaluating:  78%|███████▊  | 536/683 [00:04<00:01, 134.62it/s][A[A
+
+Evaluating:  81%|████████  | 551/683 [00:04<00:00, 135.96it/s][A[A
+
+Evaluating:  83%|████████▎ | 566/683 [00:04<00:00, 138.18it/s][A[A
+
+Evaluating:  85%|████████▍ | 580/683 [00:04<00:00, 135.43it/s][A[A
+
+Evaluating:  87%|████████▋ | 594/683 [00:04<00:00, 135.26it/s][A[A
+
+Evaluating:  89%|████████▉ | 608/683 [00:04<00:00, 134.95it/s][A[A
+
+Evaluating:  91%|█████████ | 622/683 [00:04<00:00, 134.13it/s][A[A
+
+Evaluating:  93%|█████████▎| 636/683 [00:04<00:00, 135.57it/s][A[A
+
+Evaluating:  95%|█████████▌| 650/683 [00:04<00:00, 135.99it/s][A[A
+
+Evaluating:  97%|█████████▋| 664/683 [00:05<00:00, 134.49it/s][A[A
+
+Evaluating:  99%|█████████▉| 679/683 [00:05<00:00, 136.57it/s][A[AEvaluating: 100%|██████████| 683/683 [00:05<00:00, 132.75it/s]
+03/18/2023 00:25:16 - INFO - __main__ -   ***** Eval results  *****
+03/18/2023 00:25:16 - INFO - __main__ -     acc = 0.4959721713658001
+03/18/2023 00:25:16 - INFO - __main__ -   Saving model checkpoint to checkpoints/%x-%j/checkpoint-last
+slurmstepd: error: *** JOB 49367742 ON gl1005 CANCELLED AT 2023-03-18T00:25:17 ***

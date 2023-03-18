@@ -280,10 +280,11 @@ def train(args, train_dataset, model, tokenizer, experiment=None):
                     print("Norm type {} not specified.".format(args.norm_type))
                     exit()
 
-                if isinstance(model, torch.nn.DataParallel):
-                    embeds_init = model.module.encoder.embeddings.word_embeddings(batch[0])
-                else:
-                    embeds_init = model.encoder.embeddings.word_embeddings(batch[0])
+                # if isinstance(model, torch.nn.DataParallel):
+                #     embeds_init = model.module.encoder.embeddings.word_embeddings(batch[0])
+                # else:
+                #     embeds_init = model.encoder.embeddings.word_embeddings(batch[0])
+                embeds_init = model.distilbert.embeddings.word_embeddings(batch[0])
 
             # ============================ End (2) ==================
 
@@ -494,6 +495,7 @@ def load_and_cache_examples(args, task, tokenizer, evaluate=False):
     elif output_mode == "regression":
         all_labels = torch.tensor([f.label for f in features], dtype=torch.float)
 
+    # dataset = TensorDataset(all_input_ids, all_attention_mask, all_token_type_ids, all_labels)
     dataset = TensorDataset(all_input_ids, all_attention_mask, all_token_type_ids, all_labels)
     return dataset
 
