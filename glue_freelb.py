@@ -210,11 +210,8 @@ def train(args, train_dataset, model, tokenizer, experiment=None):
 
             # ============================ Code for adversarial training=============
             # initialize delta
-            # if isinstance(model, torch.nn.DataParallel):
-            #     embeds_init = model.module.encoder.embeddings.word_embeddings(batch[0])
-            # else:
-            #     embeds_init = model.encoder.embeddings.word_embeddings(batch[0])
-            embeds_init = model.distilbert.embeddings.word_embeddings(batch[0])
+            embeds_init = model.distilbert.embeddings.word_embeddings(batch[0]) # TODO: change this to not hardcode the model in case we want to use something else
+
             if args.adv_init_mag > 0:
 
                 input_mask = inputs['attention_mask'].to(embeds_init)
@@ -413,8 +410,13 @@ def evaluate(args, model, tokenizer, prefix="", global_step=None, experiment=Non
         elif args.output_mode == "regression":
             preds = np.squeeze(preds)
         result = compute_metrics(eval_task, preds, out_label_ids)
-        criterion_name, criterion_val = None, None # glue_criterion_metrics(eval_task, result)
+
+        # criterion_name, criterion_val = glue_criterion_metrics(eval_task, result)  # if we're only using QNLI, then this is just "acc": accuracy
+        criterion_name = 'acc'
+        criterion_val = result[criterion_name]
+    
         results.update(result)
+
         if "best_criterion" not in results or criterion_val > results['best_criterion']:
             results["best_criterion"] = criterion_val
 
