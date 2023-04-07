@@ -1,3 +1,10 @@
+# Checkpoints and data
+checkpoints/
+glue_data/
+
+# Test files
+test*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
