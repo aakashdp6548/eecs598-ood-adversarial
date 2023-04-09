@@ -1,6 +1,11 @@
 # Checkpoints and data
-checkpoints/
+checkpoints/*/checkpoint*
 glue_data/
+GAN_text/models/*
+GAN_text/data/*
+*.pt
+*.bin
+slurm_output/*.out
 
 # Test files
 test*
