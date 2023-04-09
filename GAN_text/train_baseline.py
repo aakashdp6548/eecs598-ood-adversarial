@@ -60,8 +60,9 @@ parser.add_argument('--vocab_size', type=int, default=11004,
 
 args = parser.parse_args()
 
-corpus_train = SNLIDataset(train=True, vocab_size=args.vocab_size, path=args.data_path)
-corpus_test = SNLIDataset(train=False, vocab_size=args.vocab_size, path=args.data_path)
+print('Loading dataset')
+corpus_train = SNLIDataset(train=True, vocab_size=args.vocab_size - 4, path=args.data_path)
+corpus_test = SNLIDataset(train=False, vocab_size=args.vocab_size - 4, path=args.data_path)
 trainloader= torch.utils.data.DataLoader(corpus_train, batch_size = args.batch_size, collate_fn=collate_snli, shuffle=True)
 train_iter = iter(trainloader)
 testloader= torch.utils.data.DataLoader(corpus_test, batch_size = args.batch_size, collate_fn=collate_snli, shuffle=False)
@@ -70,10 +71,11 @@ random.seed(args.seed)
 np.random.seed(args.seed)
 torch.manual_seed(args.seed)
 
+print('Loading models')
 if args.model_type=="lstm":
     baseline_model = Baseline_LSTM(100,300,maxlen=args.maxlen, gpu=args.cuda)
 elif args.model_type=="emb":
-    baseline_model = Baseline_Embeddings(100, vocab_size=args.vocab_size)
+    baseline_model = Baseline_Embeddings(100, vocab_size=args.vocab_size + 4)
     
 if args.cuda:
     baseline_model = baseline_model.cuda()
@@ -84,7 +86,9 @@ criterion = nn.CrossEntropyLoss()
 
 best_accuracy = 0
 if args.train_mode:
+    print('Starting training')
     for epoch in range(0, args.epochs):
+        print(f'Epoch: {epoch}')
         niter = 0
         loss_total = 0
         while niter < len(trainloader):
@@ -99,8 +103,8 @@ if args.train_mode:
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
-            loss_total += loss.data[0]
-        print(loss_total/float(niter))
+            loss_total += loss.data.item()
+        print(f'loss={loss_total/float(niter)}')
         train_iter = iter(trainloader)
         curr_acc = evaluate_model()
         if curr_acc > best_accuracy:

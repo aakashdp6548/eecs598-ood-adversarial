@@ -360,7 +360,7 @@ def train(args, train_dataset, model, tokenizer, experiment=None):
 def evaluate(args, model, tokenizer, prefix="", global_step=None, experiment=None):
     # Loop to handle MNLI double evaluation (matched, mis-matched)
     # eval_task_names = ("mnli", "mnli-mm") if args.task_name == "mnli" else (args.task_name,)
-    #eval_outputs_dirs = (args.output_dir, args.output_dir + "-MM") if args.task_name == "mnli" else (args.output_dir,)
+    # eval_outputs_dirs = (args.output_dir, args.output_dir + "-MM") if args.task_name == "mnli" else (args.output_dir,)
     eval_task_names = (args.task_name,)
     eval_outputs_dirs = (args.output_dir,)
 
@@ -375,10 +375,6 @@ def evaluate(args, model, tokenizer, prefix="", global_step=None, experiment=Non
         # Note that DistributedSampler samples randomly
         eval_sampler = SequentialSampler(eval_dataset)
         eval_dataloader = DataLoader(eval_dataset, sampler=eval_sampler, batch_size=args.eval_batch_size)
-
-        # multi-gpu eval
-        if args.n_gpu > 1 and not isinstance(model, torch.nn.DataParallel):
-            model = torch.nn.DataParallel(model)
 
         # Eval!
         logger.info("***** Running evaluation {} *****".format(prefix))
@@ -441,12 +437,15 @@ def evaluate(args, model, tokenizer, prefix="", global_step=None, experiment=Non
 
         # results["best_name"] = criterion_name
 
-        output_eval_file = os.path.join(eval_output_dir, "eval_results.txt")
+        output_eval_file = os.path.join(eval_output_dir, f"eval_{args.task_name}_results.txt")
         with open(output_eval_file, "w") as writer:
             logger.info("***** Eval results {} *****".format(prefix))
             for key in sorted(result.keys()):
                 logger.info("  %s = %s", key, str(result[key]))
                 writer.write("%s = %s\n" % (key, str(result[key])))
+            
+            writer.write(f'{str(preds.tolist())}\n')
+            writer.write(f'{str(out_label_ids.tolist())}\n')
 
     return results
 
@@ -732,6 +731,7 @@ def main():
         from_tf=bool(".ckpt" in args.model_name_or_path),
         config=config,
         cache_dir=args.cache_dir if args.cache_dir else None,
+        ignore_mismatched_sizes=True
     )
 
     if args.local_rank == 0:
@@ -785,7 +785,7 @@ def main():
             global_step = checkpoint.split("-")[-1] if len(checkpoints) > 1 else ""
             prefix = checkpoint.split("/")[-1] if checkpoint.find("checkpoint") != -1 else ""
 
-            model = model_class.from_pretrained(checkpoint)
+            model = model_class.from_pretrained(checkpoint, ignore_mismatched_sizes=True)
             model.to(args.device)
             result = evaluate(args, model, tokenizer, prefix=prefix, global_step=global_step, experiment=experiment)
             result = dict((k + "_{}".format(global_step), v) for k, v in result.items())

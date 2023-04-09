@@ -7,10 +7,10 @@
 
 #SBATCH --partition=gpu
 #SBATCH --gpus=1
-#SBATCH --time=02:00:00
+#SBATCH --time=04:00:00
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
-#SBATCH --mem-per-gpu=40G
+#SBATCH --mem-per-gpu=12G
 #SBATCH --output=/home/aakashdp/eecs598/eecs598-ood-adversarial/slurm_output/%x-%j.out
 
 # set up job
@@ -23,13 +23,13 @@ GLUE_DIR=glue_data
 
 MODEL_TYPE=distilbert                        # Model type
 MODEL_NAME_OR_PATH=distilbert-base-cased     # Specific huggingface model
-ADV_LR=4e-2                                  # Adversarial step size
-ADV_MAG=8e-2                                 # Magnitude of perturbation
+ADV_LR=5e-3                                  # Adversarial step size
+ADV_MAG=8e-2                                 # Magnitude of initial perturbation
 ADV_MAX_NORM=0                               # Maximum perturbation
 ADV_STEPS=3                                  # Number of adversarial steps
 SEQ_LEN=512                                  # Maximum sequence length
 LR=3e-5                                      # Learning rate
-BATCH_SIZE=16                                # Batch size
+BATCH_SIZE=32                                # Batch size
 GRAD_ACCU=1                                  # Gradient accumulation steps
 TRAIN_STEPS=1                                # Number of training steps (parameter updates)
 NUM_EPOCHS=3                                 # Number of epochs to train for
