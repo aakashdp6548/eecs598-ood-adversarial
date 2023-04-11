@@ -1,3 +1,15 @@
+# Checkpoints and data
+checkpoints/*/checkpoint*
+glue_data/
+GAN_text/models/*
+GAN_text/data/*
+*.pt
+*.bin
+slurm_output/*.out
+
+# Test files
+test*
+
 .DS_Store
 
 # Byte-compiled / optimized / DLL files

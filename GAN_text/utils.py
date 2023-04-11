@@ -312,8 +312,8 @@ class SNLIDataset(data.Dataset):
 
         # prune the vocabulary
         self.dictionary.prune_vocab(k=self.vocab_size, cnt=False)
-        pkl.dump(self.sentence_ids, open(self.root+"/sent_ids.pkl", 'w'))
-        pkl.dump(self.dictionary.word2idx, open(self.root+"/vocab_"+str(len(self.dictionary.word2idx))+".pkl", 'w'))
+        pkl.dump(self.sentence_ids, open(self.root+"/sent_ids.pkl", 'wb'))
+        pkl.dump(self.dictionary.word2idx, open(self.root+"/vocab_"+str(len(self.dictionary.word2idx))+".pkl", 'wb'))
 
     def get_indices(self, words):
         vocab = self.dictionary.word2idx
