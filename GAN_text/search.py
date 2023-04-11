@@ -24,7 +24,7 @@ def get_min(indices_adv1, indices_adv2, d):
         return idx_adv1, idx_adv2
 
 
-def search_fast(generator, pred_fn, x, y, z, nsamples=20, right=0.005):
+def search_fast(generator, pred_fn, x, y, z, nsamples=32, right=0.005):
     premise, hypothesis = x
     x_adv1, x_adv2, d_adv1, d_adv2, all_adv = None, None, None, None, None
     right_curr = right
@@ -35,6 +35,8 @@ def search_fast(generator, pred_fn, x, y, z, nsamples=20, right=0.005):
         dist = np.array([np.sqrt(np.sum(x**2)) for x in delta.cpu().numpy()])
         perturb_z = Variable(mus + delta, volatile=True)
         x_tilde = generator(perturb_z)
+        print("search.py perturb_z:", perturb_z.shape)
+        print("search.py x_tilde", x_tilde.shape)
         y_tilde1, y_tilde2, all_adv = pred_fn((premise, hypothesis, x_tilde, dist))        
 
         indices_adv1 = np.where(y_tilde1.data.cpu().numpy() != y.data.cpu().numpy())[0]

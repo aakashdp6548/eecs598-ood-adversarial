@@ -250,7 +250,7 @@ def get_ppl(lm, sentences):
 
 class SNLIDataset(data.Dataset):
 
-    def __init__(self, path="./data/classifier", train=True,
+    def __init__(self, path="./MNLI_data/classifier", train=True,
                  vocab_size=11000, maxlen=10, reset_vocab=None):
         self.train = train
         self.train_data=[]
@@ -383,7 +383,7 @@ class SNLIDataset(data.Dataset):
         return lines
 
 
-def load_embeddings(root = './data/classifier/'):
+def load_embeddings(root = './MNLI_data/classifier/'):
     vocab_path=root+'vocab.pkl'
     file_path=root+'embeddings'
     vocab = pkl.load(open(vocab_path, 'rb'))

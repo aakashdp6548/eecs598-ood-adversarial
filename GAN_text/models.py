@@ -230,7 +230,7 @@ class Seq2SeqCAE(nn.Module):
         self.arch_conv_filters = conv_layer
         self.arch_conv_strides = conv_strides
         self.arch_conv_windows = conv_windows
-        self.start_symbols = to_gpu(gpu, Variable(torch.ones(10, 1).long()))
+        self.start_symbols = to_gpu(gpu, Variable(torch.ones(32, 1).long()))
 
         # Vocabulary embedding
         self.embedding = nn.Embedding(ntokens, emsize)
@@ -296,13 +296,15 @@ class Seq2SeqCAE(nn.Module):
 
         if not self.gpu:
             self.start_symbols = self.start_symbols.cpu()
+        else: 
+            self.start_symbols = self.start_symbols.cuda()
         # <sos>
         self.start_symbols.data.resize_(batch_size, 1)
         self.start_symbols.data.fill_(1)
 
         embedding = self.embedding_decoder(self.start_symbols)
-        print("emb shape:", embedding.shape)
-        print("hidden shape:", hidden.unsqueeze(1).shape)
+        # print("emb shape:", embedding.shape)
+        # print("hidden shape:", hidden.unsqueeze(1).shape)
         inputs = torch.cat([embedding, hidden.unsqueeze(1)], 2)
 
         # unroll
@@ -410,9 +412,7 @@ class Seq2SeqCAE(nn.Module):
                 hidden.register_hook(self.store_grad_norm)
 
             z_hat = inverter(hidden)
-            print(z_hat.shape)
             c_hat = generator(z_hat)
-            print(c_hat.shape)
 
             decoded = self.decode(c_hat, batch_size, maxlen,
                               indices=indices, lengths=lengths)
@@ -640,7 +640,7 @@ def generate(autoencoder, gan_gen, z, vocab, sample, maxlen):
     """
     if type(z) == Variable:
         noise = z
-    elif type(z) == torch.FloatTensor or type(z) == torch.cuda.FloatTensor:
+    elif type(z) == torch.Tensor or type(z) == torch.cuda.Tensor:
         noise = Variable(z, volatile=True)
     elif type(z) == np.ndarray:
         noise = Variable(torch.from_numpy(z).float(), volatile=True)
@@ -805,7 +805,7 @@ class Baseline_LSTM(nn.Module):
 
 
 class Baseline_Embeddings(nn.Module):
-    def __init__(self, emb_size, vocab_size=11004):
+    def __init__(self, emb_size, vocab_size=11008):
         super(Baseline_Embeddings, self).__init__()
         self.embedding_prem = nn.Embedding(vocab_size, emb_size)
         self.embedding_hypo = nn.Embedding(vocab_size, emb_size)

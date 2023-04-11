@@ -21,7 +21,7 @@ def interpolate(ae, gg, z1, z2, vocab,
     if type(z1) == Variable:
         noise1 = z1
         noise2 = z2
-    elif type(z1) == torch.FloatTensor or type(z1) == torch.cuda.FloatTensor:
+    elif type(z1) == torch.Tensor or type(z1) == torch.cuda.Tensor:
         noise1 = Variable(z1, volatile=True)
         noise2 = Variable(z2, volatile=True)
     elif type(z1) == np.ndarray:
@@ -29,6 +29,10 @@ def interpolate(ae, gg, z1, z2, vocab,
         noise2 = Variable(torch.from_numpy(z2).float(), volatile=True)
     else:
         raise ValueError("Unsupported input type (noise): {}".format(type(z1)))
+
+    if args.cuda:
+        noise1 = noise1.cuda()
+        noise2 = noise2.cuda()
 
     # interpolation weights
     lambdas = [x*1.0/(steps-1) for x in range(steps)]
@@ -49,10 +53,15 @@ def main(args):
     random.seed(args.seed)
     np.random.seed(args.seed)
     torch.manual_seed(args.seed)
-    if torch.cuda.is_available():
+    # if torch.cuda.is_available():
+    #     torch.cuda.manual_seed(args.seed)
+    # else:
+    #     print("Note that our pre-trained models require CUDA to evaluate.")
+
+    if args.cuda:
+        torch.cuda.device(0)
+        print("using cuda device gpu:" + format(torch.cuda.current_device()))
         torch.cuda.manual_seed(args.seed)
-    else:
-        print("Note that our pre-trained models require CUDA to evaluate.")
 
     ###########################################################################
     # Load the models
@@ -60,6 +69,18 @@ def main(args):
 
     model_args, idx2word, autoencoder, inverter, gan_gen, gan_disc \
         = load_models(args.load_path)
+
+    if args.cuda:
+        autoencoder = autoencoder.cuda()
+        inverter = inverter.cuda()
+        gan_gen = gan_gen.cuda()
+        gan_disc = gan_disc.cuda()
+    else:
+        autoencoder.gpu = False
+        autoencoder = autoencoder.cpu()
+        inverter = inverter.cpu()
+        gan_gen = gan_gen.cpu()
+        gan_disc = gan_disc.cpu()
 
     ###########################################################################
     # Generation code
@@ -69,6 +90,8 @@ def main(args):
     if args.ngenerations > 0:
         noise = torch.ones(args.ngenerations, model_args['z_size'])
         noise.normal_()
+        if args.cuda:
+            noise = noise.cuda()
         sentences = generate(autoencoder, gan_gen, z=noise,
                              vocab=idx2word, sample=args.sample,
                              maxlen=model_args['maxlen'])
@@ -116,9 +139,9 @@ if __name__ == "__main__":
                         help='directory to load models from')
     parser.add_argument('--temp', type=float, default=1,
                         help='softmax temperature (lower --> more discrete)')
-    parser.add_argument('--ngenerations', type=int, default=10,
+    parser.add_argument('--ngenerations', type=int, default=32,
                         help='Number of sentences to generate')
-    parser.add_argument('--ninterpolations', type=int, default=5,
+    parser.add_argument('--ninterpolations', type=int, default=32,
                         help='Number z-space sentence interpolation examples')
     parser.add_argument('--steps', type=int, default=5,
                         help='Number of steps in each interpolation')
@@ -130,6 +153,8 @@ if __name__ == "__main__":
                         help='sample when decoding for generation')
     parser.add_argument('--seed', type=int, default=1111,
                         help='random seed')
+    parser.add_argument('--cuda', action='store_true', default=False,
+                        help='use CUDA')
     args = parser.parse_args()
     print(vars(args))
     main(args)

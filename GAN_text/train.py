@@ -620,28 +620,29 @@ def perturb(data_source, epoch, corpus_test, hybrid=False):
                         gan_gen, pred_fn, (premise[i].unsqueeze(0), hypothesis[i].unsqueeze(0)),
                         target[i], z[i].view(1, 100))
 
-                try:
-                    hyp_sample_idx1 = autoencoder.generate(x_adv1, 10, True).data.cpu().numpy()[0]
-                    hyp_sample_idx2 = autoencoder.generate(x_adv2, 10, True).data.cpu().numpy()[0]
-                    words1 = [corpus_test.dictionary.idx2word[x] for x in hyp_sample_idx1]
-                    words2 = [corpus_test.dictionary.idx2word[x] for x in hyp_sample_idx2]
-                    if "<eos>" in words1:
-                        words1 = words1[:words1.index("<eos>")]
-                    if "<eos>" in words2:
-                        words2 = words2[:words2.index("<eos>")]
+                # try:
+                print('train.py perturb() xadv1 and 2 shapes:', x_adv1.shape, x_adv2.shape)
+                hyp_sample_idx1 = autoencoder.generate(x_adv1, 10, True).data.cpu().numpy()[0]
+                hyp_sample_idx2 = autoencoder.generate(x_adv2, 10, True).data.cpu().numpy()[0]
+                words1 = [corpus_test.dictionary.idx2word[x] for x in hyp_sample_idx1]
+                words2 = [corpus_test.dictionary.idx2word[x] for x in hyp_sample_idx2]
+                if "<eos>" in words1:
+                    words1 = words1[:words1.index("<eos>")]
+                if "<eos>" in words2:
+                    words2 = words2[:words2.index("<eos>")]
 
-                    f.write("\n====================Adversary==========================\n")
-                    f.write("Classfier 1 => " + " ".join(words1) + "\t" + str(d_adv1) + "\n")
-                    f.write("Classfier 2 => " + " ".join(words2) + "\t" + str(d_adv2) + "\n")
-                    f.write("========================================================\n")
-                    f.write("\n".join(all_adv) + "\n")
-                    f.flush()
-                except Exception as e:
-                    print(e)
-                    print(premise_words)
-                    print(hypothesise_words)
-                    print("no adversary found for : \n {0} \n {1}\n\n". \
-                          format(" ".join(premise_words[i]), " ".join(hypothesise_words[i])))
+                f.write("\n====================Adversary==========================\n")
+                f.write("Classfier 1 => " + " ".join(words1) + "\t" + str(d_adv1) + "\n")
+                f.write("Classfier 2 => " + " ".join(words2) + "\t" + str(d_adv2) + "\n")
+                f.write("========================================================\n")
+                f.write("\n".join(all_adv) + "\n")
+                f.flush()
+                # except Exception as e:
+                #     print(e)
+                #     print(premise_words)
+                #     print(hypothesise_words)
+                #     print("no adversary found for : \n {0} \n {1}\n\n". \
+                #           format(" ".join(premise_words[i]), " ".join(hypothesise_words[i])))
 
     gan_gen = gan_gen.cuda()
     inverter = inverter.cuda()
@@ -721,12 +722,12 @@ if __name__ == '__main__':
                                              collate_fn=collate_snli, shuffle=False)
     test_data = iter(testloader)        # different format from train_data and valid_data
 
-    classifier1 = Baseline_Embeddings(100, vocab_size=args.vocab_size+4)
-    classifier1.load_state_dict(torch.load(args.classifier_path + "/baseline/model_emb.pt", map_location=torch.device('cpu')))
+    classifier1 = Baseline_Embeddings(100, vocab_size=args.vocab_size+8)
+    classifier1.load_state_dict(torch.load(args.classifier_path + "/baseline/model_emb.pt"))
     vocab_classifier1 = pkl.load(open(args.classifier_path + "/vocab.pkl", 'rb'))
 
     classifier2 = Baseline_LSTM(100, 300, maxlen=10, gpu=args.cuda)
-    classifier2.load_state_dict(torch.load(args.classifier_path + "/baseline/model_lstm.pt", map_location=torch.device('cpu')))
+    classifier2.load_state_dict(torch.load(args.classifier_path + "/baseline/model_lstm.pt"))
     vocab_classifier2 = pkl.load(open(args.classifier_path + "/vocab.pkl", 'rb'))
 
     print("Loaded data and target classifiers!")
@@ -739,16 +740,16 @@ if __name__ == '__main__':
     print("Vocabulary Size: {}".format(ntokens))
 
     if args.reload_exp or args.load_pretrained:
-        autoencoder = torch.load(open(cur_dir + '/models/autoencoder_model.pt'), map_location=torch.device('cpu'))
-        gan_gen = torch.load(open(cur_dir + '/models/gan_gen_model.pt'), map_location=torch.device('cpu'))
-        gan_disc = torch.load(open(cur_dir + '/models/gan_disc_model.pt'), map_location=torch.device('cpu'))
+        autoencoder = torch.load(cur_dir + '/models/autoencoder_model.pt')
+        gan_gen = torch.load(cur_dir + '/models/gan_gen_model.pt')
+        gan_disc = torch.load(cur_dir + '/models/gan_disc_model.pt')
         with open(cur_dir + '/vocab.json', 'r') as f:
             corpus.dictionary.word2idx = json.load(f)
 
         if args.load_pretrained:
             inverter = MLP_I(args.nhidden, args.z_size, args.arch_i, gpu=args.cuda)
         else:
-            inverter = torch.load(open(cur_dir + '/models/inverter_model.pt'), map_location=torch.device('cpu'))
+            inverter = torch.load(cur_dir + '/models/inverter_model.pt')
     else:
         if args.convolution_enc:
             autoencoder = Seq2SeqCAE(emsize=args.emsize,
@@ -957,6 +958,8 @@ if __name__ == '__main__':
 
             else:
                 if niter_global % 100 == 0:
+                    print('[%d/%d][%d/%d] Loss_I: %.8f \n'
+                                % (epoch, args.epochs, niter, len(train_data), errI.data))
                     with open("./output/{}/logs.txt".format(args.outf), 'a') as f:
                         f.write('[%d/%d][%d/%d] Loss_I: %.8f \n'
                                 % (epoch, args.epochs, niter, len(train_data), errI.data))
@@ -964,9 +967,9 @@ if __name__ == '__main__':
         # end of epoch ----------------------------
         # evaluation
 
-        if not args.update_base:
-            perturb(test_data, epoch, corpus_test, hybrid=args.hybrid)
-            test_data = iter(testloader)
+        # if not args.update_base:
+        perturb(test_data, epoch, corpus_test, hybrid=args.hybrid)
+        test_data = iter(testloader)
 
         save_model(args, autoencoder, gan_gen, gan_disc, inverter, epoch)
 
