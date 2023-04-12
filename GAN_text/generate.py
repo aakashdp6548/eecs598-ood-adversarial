@@ -67,7 +67,7 @@ def main(args):
     # Load the models
     ###########################################################################
 
-    model_args, idx2word, autoencoder, inverter, gan_gen, gan_disc \
+    model_args, idx2word, autoencoder, inverter, gan_gen, gan_disc, vocab \
         = load_models(args.load_path)
 
     if args.cuda:
@@ -88,11 +88,22 @@ def main(args):
 
     # Generate sentences
     if args.ngenerations > 0:
-        noise = torch.ones(args.ngenerations, model_args['z_size'])
-        noise.normal_()
-        if args.cuda:
-            noise = noise.cuda()
-        sentences = generate(autoencoder, gan_gen, z=noise,
+        
+        source_sent = 'In the stock market the damage can get much worse.'.replace(',', ' ').split()
+        unk_idx = vocab['<oov>']
+        inputs = [vocab[w] if w in vocab else unk_idx for w in source_sent]
+        autoencoder.eval()
+        inverter.eval()
+        hidden = autoencoder.encode(torch.LongTensor([inputs]), None, True)
+        z = inverter(hidden)
+        print(z)
+    
+        # noise = torch.ones(args.ngenerations, model_args['z_size'])
+        # noise.normal_()
+        # if args.cuda:
+        #     noise = noise.cuda()
+        # print(noise.size())
+        sentences = generate(autoencoder, gan_gen, z=z,
                              vocab=idx2word, sample=args.sample,
                              maxlen=model_args['maxlen'])
 

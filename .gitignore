@@ -6,9 +6,10 @@ GAN_text/data/*
 *.pt
 *.bin
 slurm_output/*.out
+text-autoencoders/checkpoints
 
 # Test files
-test*
+
 
 .DS_Store
 

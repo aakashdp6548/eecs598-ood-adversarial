@@ -299,7 +299,8 @@ class Seq2SeqCAE(nn.Module):
         else: 
             self.start_symbols = self.start_symbols.cuda()
         # <sos>
-        self.start_symbols.data.resize_(batch_size, 1)
+        with torch.no_grad():
+            self.start_symbols.resize_(batch_size, 1)
         self.start_symbols.data.fill_(1)
 
         embedding = self.embedding_decoder(self.start_symbols)
@@ -621,17 +622,17 @@ def load_models(load_path):
     word2idx = json.load(open("{}/vocab.json".format(load_path), "r"))
     idx2word = {v: k for k, v in word2idx.items()}
 
-    print('Loading models from' + load_path+"/models")
+    print('Loading models from ' + load_path+"/models")
     ae_path = os.path.join(load_path+"/models/", "autoencoder_model.pt")
     inv_path = os.path.join(load_path+"/models/", "inverter_model.pt")
     gen_path = os.path.join(load_path+"/models/", "gan_gen_model.pt")
     disc_path = os.path.join(load_path+"/models/", "gan_disc_model.pt")
 
-    autoencoder = torch.load(ae_path)
-    inverter = torch.load(inv_path)
-    gan_gen = torch.load(gen_path)
-    gan_disc = torch.load(disc_path)
-    return model_args, idx2word, autoencoder, inverter, gan_gen, gan_disc
+    autoencoder = torch.load(ae_path, map_location=torch.device('cpu'))
+    inverter = torch.load(inv_path, map_location=torch.device('cpu'))
+    gan_gen = torch.load(gen_path, map_location=torch.device('cpu'))
+    gan_disc = torch.load(disc_path, map_location=torch.device('cpu'))
+    return model_args, idx2word, autoencoder, inverter, gan_gen, gan_disc, word2idx
 
 
 def generate(autoencoder, gan_gen, z, vocab, sample, maxlen):

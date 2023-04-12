@@ -1,0 +1,198 @@
+Sentence generations:
+
+the building is <oov> to its volume
+
+Sentence interpolations:
+
+the house is a popular city .
+the house is located to the office .
+the house is located to the office .
+the house is to a museum .
+the building is to be a popular .
+
+the house is <oov> a great business .
+the house is <oov> a great place .
+the house is subject to a huge amount .
+the house is subject to a national park .
+the building is supposed to a year .
+
+the country is similar to the u.s.
+the country is similar to being safe .
+the paper is to play being safe .
+the building is to war after 2010 .
+the building is to war after 2010 .
+
+the food is a good date to visit .
+the food is a good date to visit .
+the road is interesting to its interesting .
+the paper is done in the city .
+the paper goes is in a hot .
+
+the <oov> is in the place .
+<oov> and related to a museum .
+<oov> and does not a use .
+<oov> and art is a city
+<oov> 's city is in several ways .
+
+<oov> and a is for different .
+<oov> and business is a popular tourist attraction .
+the capital is a city with management .
+the capital is a popular with tourist attraction .
+the capital is a great figure figure .
+
+the building is a good looking for it .
+the house is a good time speaking .
+the house is a popular time area .
+the house is looking for the year .
+the house is in every way .
+
+the house is in a place .
+the house is in a place .
+the building is to be high in .
+the building is not in every place .
+the gao is n't in place for sale .
+
+the paper was able to a huge success .
+the paper is closed to a construction committee .
+the paper is to a peaceful park .
+the road is to clean to protect himself .
+the road to is to the park .
+
+the paper is to to its history .
+the president is to its easy .
+the point is a hard process .
+the hill was a place with important .
+the road to has a good deal with .
+
+the hotel is <oov> to every single day .
+the hotel is able to increase every year .
+the hotel is able to the office .
+the paper is to the main road to this .
+the paper is trying to the office .
+
+the market is easy to use .
+the water is easy to use .
+the main road to <oov> for alcohol .
+the family is to most expensive .
+the building was to clean .
+
+the building is easy to every war .
+the building is easy to the office .
+the building is easy to increase the museum .
+the building market is to a huge .
+the epa is good to increase the city .
+
+the clinton is the largest city center .
+the clinton is closed to stay out .
+the house is closed to stay .
+the house is closed to its .
+the house is to the road .
+
+the building is a place next day .
+the building is to increase the capital .
+the building is to increase the federal mission .
+the building is to increase the federal office .
+the building is to a government level
+
+the hotel is used to play set of .
+the building is able to figure an order .
+the building is easy to its economic .
+the building is to a huge process .
+the building is to a good date .
+
+the house is able to understand it .
+the house is able to understand it .
+the house is clear to every a museum .
+the main street is to for the office .
+the current account is to a state .
+
+the room was mean to see bush .
+the room is hard to find out .
+the building is safe to last out .
+the building is safe to stay here .
+the building is to increase .
+
+the building is beautiful to each step .
+the house is close to its history .
+the house is close to its population .
+the house is to build the office .
+the house is to a play restaurant .
+
+the building is a good date for sale .
+the building is a good date of place .
+the building is a good date of food .
+the house is a good date for society .
+the war is up in size and garden .
+
+the world is closed to the museum .
+the mail is close to the city .
+the building is easy to the city .
+the building is to figure the mail .
+the building is to a high process .
+
+the building is considered to high the guide .
+the paper is similar to its this process .
+the paper is able to increase the office .
+the current structure is in favor a year .
+the young lady is in favor of the year
+
+the <oov> needs to be <oov> .
+the house is located in <oov> .
+the house is located in every building .
+the building is able to increase every year .
+the building is able to increase every year .
+
+the building is to be considered in this .
+the building is to be considered the economy .
+the is is to play a museum .
+the is considered to every war .
+the is considered to every war .
+
+the main road is in the office .
+the main road is in the center .
+the hotel leads to is a long .
+the committee leads to participate in this .
+the lsc continued to a function for adults .
+
+the train is great to its .
+the road continued is in this .
+the house is located to france .
+the building is easy for bradley .
+the building is easy for economic growth .
+
+the paper equipment is a great tourist attraction .
+the paper equipment is a long distance .
+the paper is closed to its job .
+the paper is to its interesting walls .
+the paper is to a popular destination .
+
+the room asked to change a museum .
+the room asked to sign a museum .
+the room is done to the park .
+the sun is going to a walk .
+the building is up to a huge .
+
+the house is a good player
+the house is to be peaceful
+the house is to a system system .
+the house is to uh it is safe .
+the business is to increase the city center .
+
+the road is to clean and <oov> .
+the house is to be small entities .
+the house is a very popular <oov> .
+the house is a very popular venue .
+the house is a popular in nature .
+
+the current process is easy in figure .
+the current process is easy in figure .
+the current process is easy to increase .
+the paper is similar to its greek .
+the paper is closed to its volume .
+
+the country is trying to a museum
+the country is a good place in texas .
+the country is a good date in dallas .
+the capital is a good city in texas .
+the capital is a good and city center .
+
